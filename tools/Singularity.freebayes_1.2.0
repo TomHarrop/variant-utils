@@ -1,0 +1,17 @@
+Bootstrap:docker
+From:biocontainers/freebayes:1.2.0--py36h82df9c4_3
+Registry: quay.io
+
+%help
+
+    freebayes 1.2.0--py36h82df9c4_3
+    https://github.com/ekg/freebayes
+
+%labels
+
+    MAINTAINER "Tom Harrop"
+    VERSION "freebayes 1.2.0"
+
+%runscript
+
+    exec /usr/local/bin/freebayes "$@"
