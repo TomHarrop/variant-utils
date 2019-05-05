@@ -32,5 +32,5 @@ Include: build-essential language-pack-en wget zlib1g-dev python2.7
     ./configure \
     && make \
     && make install
-    cd ~ || exit 1
+    cd .. || exit 1
     rm -rf stacks-install stacks.tar.gz
