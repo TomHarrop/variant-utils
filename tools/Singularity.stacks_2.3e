@@ -1,7 +1,7 @@
 Bootstrap: debootstrap
 OSVersion: bionic
 MirrorURL: http://archive.ubuntu.com/ubuntu/
-Include: build-essential language-pack-en wget zlib1g-dev python2.7
+Include: build-essential language-pack-en wget zlib1g-dev python3
 
 %help
 
@@ -18,7 +18,7 @@ Include: build-essential language-pack-en wget zlib1g-dev python2.7
     update-alternatives \
         --install /usr/bin/python \
         python \
-        /usr/bin/python2.7 \
+        /usr/bin/python3 \
         1
 
     # install stacks
@@ -34,3 +34,6 @@ Include: build-essential language-pack-en wget zlib1g-dev python2.7
     && make install
     cd .. || exit 1
     rm -rf stacks-install stacks.tar.gz
+
+%environment
+    export LC_COLLATE=C
