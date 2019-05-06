@@ -1,19 +1,26 @@
-Bootstrap: debootstrap
-OSVersion: bionic
-MirrorURL: http://archive.ubuntu.com/ubuntu/
-Include: build-essential language-pack-en wget zlib1g-dev python3
+Bootstrap: docker
+From: ubuntu:19.04
 
 %help
 
-    Container for stacks 2.0b
+    Container for stacks 2.3e
     http://catchenlab.life.illinois.edu/stacks
 
 %labels
 
     MAINTAINER "Tom Harrop"
-    VERSION "stacks 2.0b"
+    VERSION "stacks 2.3e"
 
 %post
+    apt update
+    apt install -y \
+        build-essential \
+        language-pack-en \
+        python3 \
+        samtools \
+        wget \
+        zlib1g-dev 
+
     # set up python
     update-alternatives \
         --install /usr/bin/python \
