@@ -1,6 +1,6 @@
 Bootstrap: docker
 Registry: gcr.io
-From: deepvariant-docker/deepvariant:0.8.0
+From: deepvariant-docker/deepvariant:0.9.0
 
 %environment
     export PATH="${PATH}:/opt/deepvariant/bin"
