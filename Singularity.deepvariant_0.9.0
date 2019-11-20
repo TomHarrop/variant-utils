@@ -6,4 +6,4 @@ From: deepvariant-docker/deepvariant:0.9.0
     export PATH="${PATH}:/opt/deepvariant/bin"
 
 %runscript
-    exec /usr/bin/python2.7 /opt/deepvariant/bin/run_deepvariant.py "$@"
+    exec /opt/deepvariant/bin/run_deepvariant "$@"
