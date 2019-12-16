@@ -10,6 +10,10 @@ From: python:2.7.17-buster
     VERSION "transIndel 7098bd6"
 
 %post
+    # install samtools
+    apt-get update
+    apt-get install -y samtools
+
     # install python2 dependencies
     /usr/local/bin/pip install \
         pysam==0.15.3 \
