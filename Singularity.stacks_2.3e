@@ -71,3 +71,6 @@ _EOF_
 
 %environment
     export LC_ALL=C
+
+%runscript
+    exec perl /usr/local/bin/denovo_map.pl "$@"
