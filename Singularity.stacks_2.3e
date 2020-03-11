@@ -49,25 +49,27 @@ _EOF_
         /usr/bin/python3 \
         1
 
-    # install stacks
+    # download stacks
     wget -O "stacks.tar.gz" \
         http://catchenlab.life.illinois.edu/stacks/source/stacks-2.3e.tar.gz
-    mkdir stacks-install
+    mkdir /stacks-install
     tar -zxf stacks.tar.gz \
-        -C stacks-install \
+        -C /stacks-install \
         --strip-components 1
-    cd stacks-install || exit 1
+    rm stacks.tar.gz
 
+    (
+    cd /stacks-install || exit 1
     # fix the tab-matching error in stacks-integrate-alignments
     sed -i \
         's/grep -oE/grep -oP/g' \
         scripts/stacks-integrate-alignments
-
+    # install
     ./configure \
     && make \
     && make install
-    cd .. || exit 1
-    rm -rf stacks-install stacks.tar.gz
+    )
+    rm -rf /stacks-install
 
 %environment
     export LC_ALL=C
