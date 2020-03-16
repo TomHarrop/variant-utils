@@ -1,15 +1,15 @@
 Bootstrap: docker
-From: ubuntu:19.04
+From: ubuntu:19.10
 
 %help
 
-    Container for stacks 2.3e
+    Container for stacks 2.52
     http://catchenlab.life.illinois.edu/stacks
 
 %labels
 
     MAINTAINER "Tom Harrop"
-    VERSION "stacks 2.3e"
+    VERSION "stacks 2.52"
 
 %post
     export DEBIAN_FRONTEND=noninteractive
@@ -51,7 +51,7 @@ _EOF_
 
     # download stacks
     wget -O "stacks.tar.gz" \
-        http://catchenlab.life.illinois.edu/stacks/source/stacks-2.3e.tar.gz
+        http://catchenlab.life.illinois.edu/stacks/source/stacks-2.52.tar.gz
     mkdir /stacks-install
     tar -zxf stacks.tar.gz \
         -C /stacks-install \
