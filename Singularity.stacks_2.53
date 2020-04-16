@@ -3,13 +3,13 @@ From: ubuntu:19.10
 
 %help
 
-    Container for stacks 2.52
+    Container for stacks 2.53
     http://catchenlab.life.illinois.edu/stacks
 
 %labels
 
     MAINTAINER "Tom Harrop"
-    VERSION "stacks 2.52"
+    VERSION "stacks 2.53"
 
 %post
     export DEBIAN_FRONTEND=noninteractive
@@ -18,7 +18,7 @@ From: ubuntu:19.10
     # set up apt
     apt-get clean
     rm -r /var/lib/apt/lists/*
-    apt-get  update
+    apt-get update
     apt-get upgrade -y --fix-missing
     (
         . /etc/os-release
@@ -50,13 +50,13 @@ _EOF_
         1
 
     # download stacks
-    wget -O "stacks.tar.gz" \
-        http://catchenlab.life.illinois.edu/stacks/source/stacks-2.52.tar.gz
+    wget -O "/stacks.tar.gz" \
+        http://catchenlab.life.illinois.edu/stacks/source/stacks-2.53.tar.gz
     mkdir /stacks-install
-    tar -zxf stacks.tar.gz \
+    tar -zxf /stacks.tar.gz \
         -C /stacks-install \
         --strip-components 1
-    rm stacks.tar.gz
+    rm /stacks.tar.gz
 
     (
     cd /stacks-install || exit 1
