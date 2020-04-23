@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: python:3.8.2-buster
+From: python:2.7.18-buster
 
 %help
     Container for easysfs c2b26c5
@@ -19,13 +19,13 @@ From: python:3.8.2-buster
     apt-get install -y \
         build-essential
 
-    /usr/local/bin/pip3 install \
-        matplotlib==3.2.1 \
-        numpy==1.18.3 \
-        pandas==1.0.3 \
-        scipy==1.4.1
+    /usr/local/bin/pip install \
+        matplotlib==2.2.5 \
+        numpy==1.16.6 \
+        pandas==0.24.2 \
+        scipy==1.2.3
 
-    /usr/local/bin/pip3 install \
+    /usr/local/bin/pip install \
         dadi==2.0.5
 
     git clone \
