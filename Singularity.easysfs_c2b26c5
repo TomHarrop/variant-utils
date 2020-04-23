@@ -1,0 +1,43 @@
+Bootstrap: docker
+From: python:3.8.2-buster
+
+%help
+    Container for easysfs c2b26c5
+
+%labels
+    VERSION "easysfs c2b26c5"
+
+%environment
+    export PATH="/easysfs:${PATH}"
+    export LC_ALL=C
+
+%post
+    export DEBIAN_FRONTEND=noninteractive
+    export LC_ALL=C
+
+    apt-get update
+    apt-get install -y \
+        build-essential
+
+    /usr/local/bin/pip3 install \
+        matplotlib==3.2.1 \
+        numpy==1.18.3 \
+        pandas==1.0.3 \
+        scipy==1.4.1
+
+    /usr/local/bin/pip3 install \
+        dadi==2.0.5
+
+    git clone \
+        https://github.com/isaacovercast/easySFS.git \
+        /easysfs
+    (
+    cd /easysfs || exit 1
+    git checkout -f c2b26c5
+    git submodule update --init --recursive
+    chmod 755 easySFS.py
+    )
+
+
+%runscript
+    exec /easysfs/easySFS.py "$@"
