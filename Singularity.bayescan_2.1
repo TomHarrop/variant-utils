@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: ubuntu:12.04
+From: ubuntu:14.04
 
 %help
     Container for BayeScan 2.1
@@ -8,7 +8,7 @@ From: ubuntu:12.04
     VERSION "bayescan 2.1"
 
 %runscript
-    exec /usr/local/bin/bayescan_2.1 "${@}"
+    exec /usr/local/bin/bayescan_2.1 "$@"
 
 %post
     export DEBIAN_FRONTEND=noninteractive
