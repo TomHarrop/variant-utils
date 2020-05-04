@@ -1,0 +1,22 @@
+Bootstrap: docker
+From: python:3.8.2-buster
+
+%help
+    Container for whatshap 61481b6
+
+%labels
+    VERSION "whatshap 61481b6"
+
+%post
+    apt-get update
+    apt-get install -y \
+        build-essential \
+        libcrypto++-dev
+
+    # /usr/local/bin/pip3 install whatshap==0.19
+
+    /usr/local/bin/pip3 install \
+    	git+https://bitbucket.org/whatshap/whatshap.git@61481b6
+
+%runscript
+    exec /usr/local/bin/whatshap "$@"
