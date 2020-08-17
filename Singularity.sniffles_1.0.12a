@@ -1,0 +1,66 @@
+Bootstrap: docker
+From: ubuntu:20.04
+
+%help
+    Sniffles 1.0.12a
+    https://github.com/fritzsedlazeck/Sniffles
+
+%labels
+    MAINTAINER "Tom Harrop"
+    VERSION "Sniffles 1.0.12a"
+
+%environment
+    export PATH="${PATH}:/sniffles/bin/sniffles-core-1.0.12"
+    export LC_ALL=C
+
+%runscript
+    exec /sniffles/bin/sniffles-core-1.0.12/sniffles "$@"
+
+%post
+    export DEBIAN_FRONTEND=noninteractive
+    export LC_ALL=C
+
+    # reset apt
+    apt-get clean
+    rm -r /var/lib/apt/lists/*
+    (
+        . /etc/os-release
+        cat << _EOF_ > mirror.txt
+deb mirror://mirrors.ubuntu.com/mirrors.txt ${UBUNTU_CODENAME} main restricted universe multiverse
+deb mirror://mirrors.ubuntu.com/mirrors.txt ${UBUNTU_CODENAME}-updates main restricted universe multiverse
+deb mirror://mirrors.ubuntu.com/mirrors.txt ${UBUNTU_CODENAME}-backports main restricted universe multiverse
+deb mirror://mirrors.ubuntu.com/mirrors.txt ${UBUNTU_CODENAME}-security main restricted universe multiverse
+
+_EOF_
+        mv /etc/apt/sources.list /etc/apt/sources.list.bak
+        cat mirror.txt /etc/apt/sources.list.bak > /etc/apt/sources.list
+    )
+
+    apt-get update
+    apt-get upgrade -y --fix-missing
+
+    # dependencies
+    apt-get install -y \
+        build-essential \
+        cmake \
+        wget \
+        zlib1g-dev
+
+    # sniffles
+    wget -O "/sniffles.tar.gz" \
+        --no-check-certificate \
+        https://github.com/fritzsedlazeck/Sniffles/archive/v1.0.12a.tar.gz
+
+    mkdir /sniffles
+    tar -zxf /sniffles.tar.gz \
+        -C /sniffles \
+        --strip-components 1
+    (
+    cd /sniffles || exit 1
+    mkdir build
+    cd build || exit 1
+    cmake ..
+    make && make install
+    )
+
+    rm /sniffles.tar.gz
