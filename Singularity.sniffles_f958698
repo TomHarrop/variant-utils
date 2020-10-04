@@ -2,12 +2,12 @@ Bootstrap: docker
 From: ubuntu:20.04
 
 %help
-    Sniffles 1.0.12a
+    Sniffles f958698
     https://github.com/fritzsedlazeck/Sniffles
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "Sniffles 1.0.12a"
+    VERSION "Sniffles f958698"
 
 %environment
     export PATH="${PATH}:/sniffles/bin/sniffles-core-1.0.12"
@@ -43,24 +43,24 @@ _EOF_
     apt-get install -y \
         build-essential \
         cmake \
+        git \
         wget \
         zlib1g-dev
 
-    # sniffles
-    wget -O "/sniffles.tar.gz" \
-        --no-check-certificate \
-        https://github.com/fritzsedlazeck/Sniffles/archive/v1.0.12a.tar.gz
+    #############################
+    # CHECK PATH ON NEW COMMITS #
+    #############################
+    # install Sniffles from git branch
+    git clone \
+        https://github.com/fritzsedlazeck/Sniffles \
+        /sniffles
 
-    mkdir /sniffles
-    tar -zxf /sniffles.tar.gz \
-        -C /sniffles \
-        --strip-components 1
     (
     cd /sniffles || exit 1
+    git checkout -f f958698
+    git submodule update --init --recursive
     mkdir build
     cd build || exit 1
     cmake ..
     make && make install
     )
-
-    rm /sniffles.tar.gz
