@@ -1,11 +1,11 @@
 Bootstrap: docker
-From: python:3.8.2-buster
+From: python:3.8.6-buster
 
 %help
-    Container for whatshap 61481b6
+    Container for whatshap 491ec8e
 
 %labels
-    VERSION "whatshap 61481b6"
+    VERSION "whatshap 491ec8e"
 
 %post
     apt-get update
@@ -16,7 +16,7 @@ From: python:3.8.2-buster
     # /usr/local/bin/pip3 install whatshap==0.19
 
     /usr/local/bin/pip3 install \
-    	git+https://bitbucket.org/whatshap/whatshap.git@61481b6
+    	git+https://github.com/whatshap/whatshap@491ec8e
 
 %runscript
     exec /usr/local/bin/whatshap "$@"
